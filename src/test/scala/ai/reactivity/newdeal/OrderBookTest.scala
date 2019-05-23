@@ -15,8 +15,10 @@ class OrderBookTest extends FunSuite {
 
   test("insertion order") {
     val bids = List(-1.5|200, -1.4|50, -1.4|100, -1.3|600)
-    val book = OrderBook('TEST, -1.4|50, -1.4|100, -1.3|600, -1.5|200)
+    val offers = List(1.6|50, 1.7|100, 1.9|50, 2.0|58, 2.0|42)
+    val book = OrderBook('TEST, -1.4|50, 2.0|58, 1.9|50, -1.4|100, -1.3|600, -1.5|200,  2.0|42, 1.6|50, 1.7|100)
     assert(book.bids == bids)
+    assert(book.offers == offers)
   }
 
   test("Literal syntax") {
