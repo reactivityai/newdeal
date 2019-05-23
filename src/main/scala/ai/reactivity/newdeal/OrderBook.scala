@@ -3,12 +3,14 @@ package ai.reactivity.newdeal
 case class OrderBook private(symbol: Symbol, bids: List[Entry], offers: List[Entry]) {
   def +(entry: Entry): OrderBook = {
     if (entry.isBid) {
-      val idx = bids.indexWhere(_.price < entry.price)
-      val newBids = bids.patch(idx, List(entry), 0)
+      val idx = bids.indexWhere(_.price > entry.price)
+      val insert = if (idx == -1) bids.length else idx
+      val newBids = bids.patch(insert, List(entry), 0)
       copy(bids = newBids)
     } else {
       val idx = bids.indexWhere(_.price > entry.price)
-      val newOffers = offers.patch(idx, List(entry), 0)
+      val insert = if (idx == -1) offers.length else idx
+      val newOffers = offers.patch(insert, List(entry), 0)
       copy(offers = newOffers)
     }
   }
