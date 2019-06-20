@@ -15,7 +15,7 @@ case class OrderBook private(symbol: Symbol, bids: List[Entry], offers: List[Ent
     val line = if (price < 0) bids else offers
     val priceStart = line.indexWhere(_.price == price)
     if (priceStart == -1) this else {
-      ???
+
     }
   }
 }
